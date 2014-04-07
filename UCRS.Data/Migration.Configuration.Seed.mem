@@ -1,0 +1,56 @@
+﻿namespace UCRS.Data.Migrations
+{
+    using System;
+    using System.Data.Entity;
+    using System.Data.Entity.Migrations;
+    using System.Linq;
+    using UCRS.Model;
+
+    internal sealed class Configuration : DbMigrationsConfiguration<UCRS.Data.UniversityContext>
+    {
+        public Configuration()
+        {
+            AutomaticMigrationsEnabled = true;
+        }
+
+        protected override void Seed(UCRS.Data.UniversityContext context)
+        {
+            var crypto = new SimpleCrypto.PBKDF2();
+            crypto.HashIterations = 1;
+            string passwordForAll = "1234567";
+            string encrpPass = crypto.Compute(passwordForAll);
+            string salt = crypto.Salt;
+
+            Student[] dummyStudents = new Student[]
+                                {
+                                    new Student { Email = "ivan.ivanov@ucrs.edu", Password = encrpPass, PasswordSalt = salt },
+                                    new Student { Email = "peter.petrov@ucrs.edu", Password = encrpPass, PasswordSalt = salt },
+                                    new Student { Email = "georgi.georgiev@ucrs.edu", Password = encrpPass, PasswordSalt = salt },
+                                    new Student { Email = "maria.stoianova@ucrs.edu", Password = encrpPass, PasswordSalt = salt },
+                                    new Student { Email = "emilia.todorova@ucrs.edu", Password = encrpPass, PasswordSalt = salt }
+                                };
+
+            context.Students.AddOrUpdate(dummyStudents);
+
+            context.Courses.AddOrUpdate(
+                c => c.Name,
+                new Course { Name = "Computer Science" },
+                new Course { Name = "Intellectual property" },
+                new Course { Name = "Marketing" },
+				new Course { Name = "Biology" },
+				new Course { Name = "Psychology" }
+                );
+
+            context.StudentsInCourses.AddOrUpdate(
+                sic => sic.StudentId,
+                new StudentInCourse { StudentId = 1, CourseId = 1 },
+                new StudentInCourse { StudentId = 1, CourseId = 2 },
+                new StudentInCourse { StudentId = 1, CourseId = 3 },
+                new StudentInCourse { StudentId = 2, CourseId = 1 },
+                new StudentInCourse { StudentId = 2, CourseId = 2 },
+                new StudentInCourse { StudentId = 3, CourseId = 3 },
+                new StudentInCourse { StudentId = 4, CourseId = 3 }
+                );
+        }
+    }
+}

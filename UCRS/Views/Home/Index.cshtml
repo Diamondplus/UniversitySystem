@@ -1,0 +1,23 @@
+﻿<div class="frameInside">
+    <div class="styleBox">
+        @if (Request.IsAuthenticated)
+        {
+            <div class="textBgr">
+                <h4>Hello <span class="authenUser">@Html.Encode(User.Identity.Name)</span>,</h4>
+                <hr />
+                <p>Welcome to home page !</p>
+                <hr />
+            </div>
+        }
+        else
+        {
+            <div class="textBgr">
+                <h4>Hello Student,</h4>
+                <hr />
+                <p>You can  @Html.ActionLink("Log In", "Login", "Student")<span> or </span>@Html.ActionLink("Sign Up", "SignUp", "Student")</p>
+                <p>Good luck !</p>
+                <hr />
+            </div>
+        }
+    </div>
+</div>

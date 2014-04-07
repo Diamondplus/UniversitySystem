@@ -1,0 +1,30 @@
+﻿@model UCRS.Models.LoginStudentViewModel
+@{
+    ViewBag.Title = "SignIn";
+}
+<div class="frameInside">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div class="styleBox">
+            <h1>Sign up</h1>
+            <fieldset>
+                <legend>Please enter your username and password</legend>
+                <div class="editor-label">@Html.LabelFor(u => u.Email)</div>
+                <div class="editor-field">@Html.TextBoxFor(u => u.Email)</div>
+                <div class="delta"></div>
+                <div class="editor-label">@Html.LabelFor(u => u.Password)</div>
+                <div class="editor-field">@Html.PasswordFor(u => u.Password) </div>
+                <div class="delta"></div>
+                <input class="formBtn" type="submit" value="Sign up" />
+            </fieldset>
+        </div>
+      
+        <div id="validationResult">
+            <div>@Html.ValidationSummary(false, "Create user failed. Chek your register details !")</div>
+        </div>
+
+     }
+</div>
+
+<script src="~/Scripts/mySignIn.js"></script>

@@ -1,0 +1,27 @@
+﻿@model List<UCRS.Model.Student>
+
+@{
+    ViewBag.Title = "List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    ViewBag.Title = "User Profile";
+}
+
+<div class="frameInside">
+    <h4 class="listTitle">Total: @Model.Count students</h4>
+    <hr />
+    <div id="stList" class="stList">
+        <table>
+            @for (int i = 0; i < Model.Count(); i++)
+            {
+                <tr>
+                    <td><a class="regLink" id=@Model[i].StudentId href="#">@Model[i].StudentId. @Model[i].Email</a></td><td><span class="numberCourses">   @ViewBag.CoursesPerStudent[i] Course/s</span></td>
+                </tr>
+            }
+         </table>
+    </div>
+    <hr />
+</div>
+

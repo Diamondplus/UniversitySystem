@@ -1,0 +1,75 @@
+﻿@using System.Collections
+@using Antlr.Runtime
+@using UCRS.Model
+@model MyCoursesViewModel
+
+
+@{
+    ViewBag.Title = "MyCourses";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="frameInside">
+    <div>
+        <div class="leftDivCourse">
+            <h4 class="courseTitles">Registered courses - Student Id: <span id="studentId" class="studentTitle">@Model.Student.StudentId</span><span> Email: </span><span class="studentEmail studentTitle">@Model.Student.Email</span></h4>
+        </div>
+        <div class="rightDivCourse">
+            @Html.ActionLink(" Add Edit Delete COURSES ", "Index", "Course")
+        </div>
+    </div>
+
+
+    <hr />
+    <div id="regCourses" class="regCourses">
+        @foreach (var item in Model.RegList)
+        {
+            <a class="regLink" id=@item.CourseId href="#"> @item.Name</a><br />
+        }
+
+    </div>
+    <h4 class="courseTitle">Unregistered courses - Student Id: <span class="studentTitle">@Model.Student.StudentId</span><span> Email: </span><span class="studentEmail studentTitle">@Model.Student.Email</span></h4>
+    <hr />
+    <div id="unregCourses" class="unregCourses">
+        @foreach (var item in Model.UnregList)
+        {
+            <a class="unregLink" id=@item.CourseId href="#"> @item.Name</a><br />
+        }
+
+    </div>
+    <hr />
+
+    <input id="clearRegCoursesBtn" type="submit" value=" | For Tests |          CLEAR registered courses IU & DB,  REFRESH Two Windows - Ajax & JSon   " />
+
+</div>
+
+<!-- modal content -->
+<div id="basic-modal-content">
+    <h3>This course is registered !</h3>
+    <p>Course: <span id="courseNameForInfo"></span></p>
+</div>
+<!-- preload the images -->
+<div style='display:none'>
+    <img src="../../Content/x.png" alt="" />
+</div>
+
+<!-- modal content -->
+<div id='confirm'>
+    <div class='header'><span>Confirm</span></div>
+    <div class='message'></div>
+    <div class='message2' id="courseNameForConfirm"></div>
+    <div class='buttons'>
+        <div class='no simplemodal-close'>No</div><div class='yes'>Yes</div>
+    </div>
+</div>
+<!-- preload the images -->
+<div style='display:none'>
+    <img src="../../Content/headergreen.gif" alt="" />
+    <img src="../../Content/button.gif" alt="" />
+</div>
+
+
+<form id="__AjaxAntiForgeryForm" action="#" method="post">@Html.AntiForgeryToken()</form>
+
+<script src="~/Scripts/myCourses.js"></script>
+<script src="~/Scripts/jquery.simplemodal.js"></script>

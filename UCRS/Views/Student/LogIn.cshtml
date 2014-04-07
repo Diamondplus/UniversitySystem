@@ -1,0 +1,14 @@
+﻿@model UCRS.Models.LoginStudentViewModel
+@{
+    ViewBag.Title = "LogIn";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="frameInside">
+    <div class="styleBox">
+        <h1>Login</h1>
+        @Html.Login(Model)
+    </div>
+    <div id="validationResult"></div>
+</div>
+<form id="__AjaxAntiForgeryForm" action="#" method="post">@Html.AntiForgeryToken()</form>
+<script src="~/Scripts/myLogin.js"></script>

@@ -1,0 +1,40 @@
+﻿@model IEnumerable<UCRS.Model.Course>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="frameInside">
+    <h4 class="listTitle">Total: @Model.Count() courses</h4>
+    <hr />
+    <div id="stList" class="stList">
+        <p class="addNewCourse">
+            @Html.ActionLink("Create New Course", "Create")
+        </p>
+        <table class="table">
+            <tr>
+                <th class="courseHead">
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td class="courseName">
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.CourseId }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.CourseId }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.CourseId })
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+    <br />
+    @Html.ActionLink("Back to Manage Courses", "MyCourses", "Student")
+</div>

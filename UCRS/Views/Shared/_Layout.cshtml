@@ -1,0 +1,69 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jqueryui")
+    @*@Scripts.Render("~/bundles/bootstrap")*@
+</head>
+
+<body>
+    <header>
+
+        <div class="menuHeader">
+            <nav class="insideHeader">
+                @if (Request.IsAuthenticated)
+                {
+                    <span>| </span>
+                    @Html.ActionLink(("Home: " + Html.Encode(User.Identity.Name)), "Index", "Home")
+                    <span>| </span>
+                    @Html.ActionLink("Menage Courses", "MyCourses", "Student")
+                    <span>| </span>                
+                    @Html.ActionLink("Students", "List", "Student")
+                    <span>| </span>                                           
+                    @Html.ActionLink("About", "About", "Home")
+                    <span>| </span>
+                    @Html.ActionLink("Log Out", "SignOut", "Student")
+                    <span>| </span>                                   
+                }
+                else
+                {
+                    <span>| </span>
+                    @Html.ActionLink("Home", "Index", "Home")
+                    <span>| </span>
+                    @Html.ActionLink("Log In", "Login", "Student")
+                    <span>| </span>
+                    @Html.ActionLink("Sign Up", "SignUp", "Student")
+                    <span>| </span>
+                    @Html.ActionLink("Sudents", "List", "Student")
+                    <span>| </span>
+                    @Html.ActionLink("About", "About", "Home")
+                    <span>| </span>
+                }
+            </nav>
+        </div>
+    </header>
+    @RenderBody()
+    <footer>
+        <div style="width: auto; background-color: #016c24; height: 25px; padding-top: 5px; border-radius: 0 0 8px 8px;">
+            <div style="width: 560px; margin: auto; color: #EEE">
+                <span>UCRS - University Courses Registration System &copy; @DateTime.Now.Year - ASP.NET MVC 5 Application</span>
+            </div>
+        </div>
+    </footer>
+
+
+
+    @if (IsSectionDefined("scripts"))
+    {
+        RenderSection("scripts");
+    }
+
+</body>
+</html>

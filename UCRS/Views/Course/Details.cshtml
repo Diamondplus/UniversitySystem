@@ -1,0 +1,31 @@
+﻿@model UCRS.Model.Course
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="frameInside">
+    <h4 class="listTitle">Details</h4>
+    <hr />
+    <div id="stList" class="stList">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            <div class="courseTitle">
+                <div class="courseName">
+                    @Html.DisplayNameFor(model => model.CourseId)<span>: </span>
+                    <span class="inputFieldCourse">@Html.DisplayFor(model => model.CourseId)</span>
+                </div>
+                <div class="courseName">
+                    @Html.DisplayNameFor(model => model.Name)<span>: </span>
+                    <span class="inputFieldCourse">@Html.DisplayFor(model => model.Name)</span>
+                </div><br />
+            </div>
+        }
+        <div>
+            @Html.ActionLink("Edit", "Edit", new { id = Model.CourseId })<br />
+            @Html.ActionLink("Back to Course List", "Index")
+        </div>
+    </div>
+</div>
